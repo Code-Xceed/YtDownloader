@@ -21,7 +21,7 @@ def index():
                 ydl_opts = {
                     'format': quality,
                     'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
-                    'cookies_from_browser': ('edge',),  # Uses Chrome cookies to avoid bot detection
+                    'cookiefile': 'youtube.com_cookies.txt',  # Uses Chrome cookies to avoid bot detection
                 }
 
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
