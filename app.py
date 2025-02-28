@@ -30,6 +30,7 @@ def index():
                 ydl_opts = {
                     'format': selected_quality,
                     'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
+                    'cookies-from-browser': 'chrome', 
                 }
 
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
