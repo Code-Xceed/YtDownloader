@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,48 +12,32 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(to right, #007bff, #6610f2);
-            color: white;
+            background-color: #f0f0f0;
         }
-
         .container {
-            background: rgba(255, 255, 255, 0.2);
+            background: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            backdrop-filter: blur(10px);
         }
-
-        input[type="text"],
-        select {
-            width: 300px;
+        input, select {
+            width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-
         input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #28a745;
+            background-color: #007bff;
             color: white;
-            border: none;
-            border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
         }
-
         input[type="submit"]:hover {
-            background-color: #218838;
-        }
-
-        h1 {
-            margin-bottom: 10px;
+            background-color: #0056b3;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h1>YouTube Video Downloader</h1>
@@ -63,15 +46,13 @@
             <br>
             <select name="quality">
                 <option value="best">Best Quality</option>
-                <option value="1080p">1080p</option>
-                <option value="720p">720p</option>
-                <option value="480p">480p</option>
-                <option value="360p">360p</option>
+                <option value="bestvideo[ext=mp4]+bestaudio[ext=m4a]">1080p (MP4)</option>
+                <option value="bestvideo[height<=720]+bestaudio">720p (MP4)</option>
+                <option value="worst">Lowest Quality</option>
             </select>
             <br>
             <input type="submit" value="Download">
         </form>
     </div>
 </body>
-
 </html>
