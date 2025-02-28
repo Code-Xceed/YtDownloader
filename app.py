@@ -13,30 +13,22 @@ if not os.path.exists(DOWNLOAD_FOLDER):
 def index():
     if request.method == "POST":
         url = request.form.get("url")
-        quality = request.form.get("quality")  # Get selected quality
+        quality = request.form.get("quality")
 
         if url:
             try:
-                # Define quality options
-                quality_options = {
-                    "best": "bestvideo+bestaudio/best",
-                    "1080p": "bestvideo[height<=1080]+bestaudio/best",
-                    "720p": "bestvideo[height<=720]+bestaudio/best",
-                    "480p": "bestvideo[height<=480]+bestaudio/best",
-                    "360p": "bestvideo[height<=360]+bestaudio/best",
-                }
-                selected_quality = quality_options.get(quality, "best")
-
+                # Set yt-dlp options with cookies
                 ydl_opts = {
-                    'format': selected_quality,
+                    'format': quality,
                     'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
-                    'cookies-from-browser': 'chrome', 
+                    'cookies_from_browser': ('chrome',),  # Uses Chrome cookies to avoid bot detection
                 }
 
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                     info = ydl.extract_info(url, download=True)
                     file_path = ydl.prepare_filename(info)
 
+                # Return the file for download
                 @after_this_request
                 def remove_file(response):
                     try:
@@ -50,12 +42,7 @@ def index():
             except Exception as e:
                 return f"An error occurred: {e}"
 
-        else:
-            return "Please provide a valid YouTube URL."
-
     return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
-    port = int(os.environ.get("PORT", 5000))  # Use PORT from environment, default to 5000
-    app.run(host="0.0.0.0", port=port, debug=False)  # Bind to 0.0.0.0 for public access
